@@ -3,7 +3,7 @@ import VirtualizedTable from '../VirtualizedTable/VirtualizedTable';
 
 export default function SensorList(props) {
   const { comments } = props;
-  console.log(comments);
+
   return (
     <VirtualizedTable
       rowCount={comments.length}

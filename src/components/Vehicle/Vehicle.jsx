@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import Actions from './Actions';
 import SensorList from './SensorList';
 import CommentList from './CommentList';
@@ -42,17 +41,12 @@ export default function Vehicle(props) {
   const classes = useStyles();
   const { values, handleChange, setFormFields, formMode, setFormMode } = props;
 
-  let submitButton =
-    formMode === 'Selected' ? null : (
-      <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        component="span"
-      >
-        {formMode}
-      </Button>
-    );
+  const onChange = (e) => {
+    if (formMode !== 'Changed') {
+      setFormMode('Changed');
+    }
+    handleChange(e);
+  };
 
   return (
     <div className={classes.root}>
@@ -60,6 +54,7 @@ export default function Vehicle(props) {
         <Actions
           reset={setFormFields}
           id={values.id}
+          formMode={formMode}
           setFormMode={setFormMode}
         />
         <TextField
@@ -67,7 +62,7 @@ export default function Vehicle(props) {
           id="name"
           label="Name"
           value={values.name}
-          onChange={handleChange}
+          onChange={onChange}
           disabled={formMode === 'Selected'}
           fullWidth
         />
@@ -76,7 +71,7 @@ export default function Vehicle(props) {
           id="model"
           label="Model"
           value={values.model}
-          onChange={handleChange}
+          onChange={onChange}
           disabled={formMode === 'Selected'}
           fullWidth
         />
@@ -85,7 +80,7 @@ export default function Vehicle(props) {
           id="tags"
           label="Tags"
           value={values.tags}
-          onChange={handleChange}
+          onChange={onChange}
           helperText="Seperated by comma ( , )"
           disabled={formMode === 'Selected'}
           fullWidth
@@ -96,7 +91,7 @@ export default function Vehicle(props) {
               id="speed"
               label="Speed"
               value={values.speed}
-              onChange={handleChange}
+              onChange={onChange}
               disabled={formMode === 'Selected'}
               type="number"
             />
@@ -106,7 +101,7 @@ export default function Vehicle(props) {
               id="latitude"
               label="Latitude"
               value={values.latitude}
-              onChange={handleChange}
+              onChange={onChange}
               disabled={formMode === 'Selected'}
               type="number"
             />
@@ -116,7 +111,7 @@ export default function Vehicle(props) {
               id="longitude"
               label="Longitude"
               value={values.longitude}
-              onChange={handleChange}
+              onChange={onChange}
               disabled={formMode === 'Selected'}
               type="number"
             />
@@ -135,8 +130,4 @@ export default function Vehicle(props) {
       </form>
     </div>
   );
-}
-
-{
-  /* {submitButton} */
 }

@@ -1,6 +1,9 @@
 import { useState } from 'react';
 
-export default ({ initialValues, onSubmit = () => console.log('submit') }) => {
+const useFormFields = ({
+  initialValues,
+  onSubmit = () => console.log('submit'),
+}) => {
   const [values, setValues] = useState(initialValues || {});
 
   const handleChange = (e) => {
@@ -16,3 +19,5 @@ export default ({ initialValues, onSubmit = () => console.log('submit') }) => {
 
   return [values, handleChange, setFormFields];
 };
+
+export default useFormFields;

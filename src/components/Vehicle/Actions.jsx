@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Fab, colors } from '@material-ui/core';
-import { Add, Edit, Delete } from '@material-ui/icons';
+import { Add, Edit, Delete, Save } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -11,11 +11,22 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
   danger: {
-    backgroundColor: colors.red[900],
+    color: 'white',
+    backgroundColor: colors.red[500],
+    '&:hover': {
+      backgroundColor: colors.red[700],
+    },
+  },
+  save: {
+    color: 'white',
+    backgroundColor: colors.green[400],
+    '&:hover': {
+      backgroundColor: colors.green[600],
+    },
   },
 }));
 
-function Actions({ reset, id, setFormMode }) {
+function Actions({ reset, id, formMode, setFormMode }) {
   const classes = useStyles();
 
   return (
@@ -41,8 +52,14 @@ function Actions({ reset, id, setFormMode }) {
         <Edit />
       </Fab>
       <Fab
+        className={`${classes.icons} ${classes.save}`}
+        aria-label="save"
+        disabled={formMode !== 'Changed'}
+      >
+        <Save />
+      </Fab>
+      <Fab
         className={`${classes.icons} ${classes.danger}`}
-        color="secondary"
         aria-label="delete"
         disabled={id === undefined}
       >

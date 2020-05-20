@@ -12,10 +12,9 @@ const initialValues = {
   comments: [],
 };
 
-test('should use for fields', () => {
+test('should use form fields', () => {
   const { result } = renderHook(() => useFormFields({ initialValues }));
 
-  console.log(result.current);
   const [values, handleChange, setFormFields] = result.current;
 
   expect(values).toEqual(initialValues);
