@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default ({ initialValues, onSubmit }) => {
+export default ({ initialValues, onSubmit = () => console.log('submit') }) => {
   const [values, setValues] = useState(initialValues || {});
 
   const handleChange = (e) => {
